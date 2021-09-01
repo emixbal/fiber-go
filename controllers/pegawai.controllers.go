@@ -1,16 +1,16 @@
 package controllers
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"fiber-go/models"
+	"net/http"
 
-// func FetchAllPegawai(c echo.Context) error {
-// 	result, err := models.FethAllPegawai()
-
-// 	if err != nil {
-// 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
-// 	}
-// 	return c.JSON(http.StatusOK, result)
-// }
+	"github.com/gofiber/fiber/v2"
+)
 
 func FetchAllPegawai(c *fiber.Ctx) error {
-	return c.SendString("fetch all pegawai")
+	result, err := models.FethAllPegawai()
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(map[string]string{"message": err.Error()})
+	}
+	return c.Status(http.StatusOK).JSON(result)
 }
