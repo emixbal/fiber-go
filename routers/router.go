@@ -1,6 +1,10 @@
 package routers
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"fiber-go/controllers"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func Init() *fiber.App {
 	app := fiber.New()
@@ -11,6 +15,8 @@ func Init() *fiber.App {
 	app.Get("/hai", func(c *fiber.Ctx) error {
 		return c.SendString("hai")
 	})
+
+	app.Get("/pegawai", controllers.FetchAllPegawai)
 
 	return app
 }
