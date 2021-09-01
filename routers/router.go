@@ -8,15 +8,9 @@ import (
 
 func Init() *fiber.App {
 	app := fiber.New()
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("ok")
-	})
-
-	app.Get("/hai", func(c *fiber.Ctx) error {
-		return c.SendString("hai")
-	})
-
-	app.Get("/pegawai", controllers.FetchAllPegawai)
+	app.Get("/", func(c *fiber.Ctx) error { return c.SendString("/ path") })
+	app.Get("/pegawai", controllers.FetchAllPegawais)
+	app.Put("/pegawai/:id", controllers.UpdatePegawai)
 
 	return app
 }
