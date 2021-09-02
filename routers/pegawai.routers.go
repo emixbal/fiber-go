@@ -12,6 +12,7 @@ func Pegawai(app *fiber.App) {
 
 	// define middleware
 	pegawai.Use(middlewares.ExampleMiddleware)
+	// more routes
 	pegawai.Get("/", controllers.FetchAllPegawais)
 	pegawai.Put("/:id", controllers.UpdatePegawai)
 }
