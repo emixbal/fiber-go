@@ -10,9 +10,14 @@ import (
 func Pegawai(app *fiber.App) {
 	pegawai := app.Group("/pegawai")
 
-	// define middleware
-	pegawai.Use(middlewares.ExampleMiddleware)
+	// // define middleware
+	// pegawai.Use(middlewares.ExampleMiddleware)
 	// more routes
-	pegawai.Get("/", controllers.FetchAllPegawais)
+	pegawai.Get(
+		"/",
+		middlewares.FetchUserMiddleware,
+		middlewares.ExampleMiddleware,
+		controllers.FetchAllPegawais,
+	)
 	pegawai.Put("/:id", controllers.UpdatePegawai)
 }
