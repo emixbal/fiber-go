@@ -9,6 +9,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.18.0
 	github.com/klauspost/compress v1.13.5 // indirect
 	github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f
-	golang.org/x/sys v0.0.0-20210831042530-f4d43177bf5e // indirect
+	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
+	golang.org/x/sys v0.0.0-20210902050250-f475640dd07b // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
