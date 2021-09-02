@@ -1,16 +1,17 @@
 package routers
 
 import (
-	"fiber-go/controllers"
-
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
-func Init() *fiber.App {
-	app := fiber.New()
-	app.Get("/", func(c *fiber.Ctx) error { return c.SendString("/ path") })
-	app.Get("/pegawai", controllers.FetchAllPegawais)
-	app.Put("/pegawai/:id", controllers.UpdatePegawai)
+func Init(app *fiber.App) {
+	app.Use(logger.New())
 
-	return app
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("/ path")
+	})
+
+	//palece new routers below
+	Pegawai(app)
 }
