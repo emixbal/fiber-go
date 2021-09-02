@@ -14,4 +14,5 @@ func Init(app *fiber.App) {
 
 	//palece new routers below
 	Pegawai(app)
+	Login(app)
 }
