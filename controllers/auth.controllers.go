@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fiber-go/helpers"
+	"fiber-go/models"
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
@@ -17,9 +18,10 @@ func Register(c *fiber.Ctx) error {
 }
 
 func Login(c *fiber.Ctx) error {
-	unHashPassword := c.FormValue("password")
-	hashPasswordDb := "$2a$10$VQA.gpUGleX0vqkSXJcTjuwtZzUCXVUfuJxoHH4T0BUXZ83pFyLou"
-	isMatch, _ := helpers.CheckPaaword(hashPasswordDb, unHashPassword)
+	username := c.FormValue("username")
+	txtUnHashPassword := c.FormValue("password")
+
+	isMatch, _ := models.CheckLogin(username, txtUnHashPassword)
 	if !isMatch {
 		return c.SendString("password salah")
 	}
