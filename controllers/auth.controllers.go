@@ -19,8 +19,8 @@ func Register(c *fiber.Ctx) error {
 func Login(c *fiber.Ctx) error {
 	unHashPassword := c.FormValue("password")
 	hashPasswordDb := "$2a$10$VQA.gpUGleX0vqkSXJcTjuwtZzUCXVUfuJxoHH4T0BUXZ83pFyLou"
-	isTrue, _ := helpers.CheckPaaword(hashPasswordDb, unHashPassword)
-	if !isTrue {
+	isMatch, _ := helpers.CheckPaaword(hashPasswordDb, unHashPassword)
+	if !isMatch {
 		return c.SendString("password salah")
 	}
 	return c.SendString("ok")
