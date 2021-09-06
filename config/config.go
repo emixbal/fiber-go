@@ -8,6 +8,7 @@ type Configuration struct {
 	DB_PORT     string
 	DB_HOST     string
 	DB_NAME     string
+	JWT_SECRET  string
 }
 
 func GetConfig() Configuration {
