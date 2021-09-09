@@ -5,6 +5,7 @@ import (
 	"fiber-go/helpers"
 	"fiber-go/models"
 	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -33,7 +34,7 @@ func Login(c *fiber.Ctx) error {
 
 	isMatch, _ := models.CheckLogin(username, txtUnHashPassword)
 	if !isMatch {
-		return c.SendString("password salah")
+		return c.Status(http.StatusBadRequest).JSON(map[string]string{"message": "Password salah"})
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"foo": "bar",
@@ -43,9 +44,9 @@ func Login(c *fiber.Ctx) error {
 	tokenString, err := token.SignedString([]byte(conf.JWT_SECRET))
 	if err != nil {
 		fmt.Println(err)
-		return c.SendString("error generate token")
+		return c.Status(http.StatusInternalServerError).JSON(map[string]string{"message": "something went wrong!"})
 	}
-	return c.JSON(map[string]string{
+	return c.Status(http.StatusOK).JSON(map[string]string{
 		"token": tokenString,
 	})
 }
