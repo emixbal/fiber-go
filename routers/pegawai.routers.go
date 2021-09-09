@@ -15,8 +15,7 @@ func Pegawai(app *fiber.App) {
 	// more routes
 	pegawai.Get(
 		"/",
-		middlewares.FetchUserMiddleware,
-		middlewares.ExampleMiddleware,
+		middlewares.IsAuthenticated,
 		controllers.FetchAllPegawais,
 	)
 	pegawai.Put("/:id", controllers.UpdatePegawai)
