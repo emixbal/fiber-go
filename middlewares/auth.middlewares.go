@@ -15,7 +15,11 @@ func IsAuthenticated(c *fiber.Ctx) error {
 	conf := config.GetConfig()
 
 	if tokenString == "" {
-		return c.Status(http.StatusUnauthorized).JSON(map[string]string{"message": "Unauthorized, need access token to access this API route!"})
+		return c.Status(http.StatusUnauthorized).JSON(
+			map[string]string{
+				"message": "Unauthorized, need access token to access this API route!",
+			},
+		)
 	}
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -27,11 +31,19 @@ func IsAuthenticated(c *fiber.Ctx) error {
 	})
 	if err != nil {
 		fmt.Println(err)
-		return c.Status(http.StatusUnauthorized).JSON(map[string]string{"message": "Unauthorized, access token is invalid!"})
+		return c.Status(http.StatusUnauthorized).JSON(
+			map[string]string{
+				"message": "Unauthorized, access token is invalid!",
+			},
+		)
 	}
 
 	if _, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		return c.Next()
 	}
-	return c.Status(http.StatusUnauthorized).JSON(map[string]string{"message": "Unauthorized, access token is invalid!"})
+	return c.Status(http.StatusUnauthorized).JSON(
+		map[string]string{
+			"message": "Unauthorized, access token is invalid!",
+		},
+	)
 }
