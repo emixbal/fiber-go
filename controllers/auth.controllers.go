@@ -30,6 +30,13 @@ func Login(c *fiber.Ctx) error {
 	username := c.FormValue("username")
 	txtUnHashPassword := c.FormValue("password")
 
+	if username == "" {
+		return c.Status(http.StatusBadRequest).JSON(map[string]string{"message": "Username tidak boleh kosong"})
+	}
+	if txtUnHashPassword == "" {
+		return c.Status(http.StatusBadRequest).JSON(map[string]string{"message": "Password tidak boleh kosong"})
+	}
+
 	conf := config.GetConfig()
 
 	isMatch, _ := models.CheckLogin(username, txtUnHashPassword)
